@@ -17,9 +17,9 @@ module Savolpeugeot
           "#{source_name} - TIME SBC USADOS"
         elsif product_name.downcase.include?('sto')
           "#{source_name} - TIME STO USADOS"
-        elsif product_name.downcase.include?('citroën')
+        elsif product_name.downcase.include?('citroën') && source_name == 'Webmotors - Novos'
           "#{source_name} - TIME CITROEN"
-        elsif product_name.downcase.include?('peugeot')
+        elsif product_name.downcase.include?('peugeot') && source_name == 'Webmotors - Novos'
           "#{source_name} - TIME PEUGEOT"
         else
           lead.source.name
