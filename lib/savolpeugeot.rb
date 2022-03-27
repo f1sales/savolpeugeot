@@ -2,10 +2,44 @@
 
 require_relative "savolpeugeot/version"
 require 'f1sales_custom/hooks'
+require 'f1sales_custom/parser'
+require 'f1sales_custom/source'
 require "f1sales_helpers"
 
 module Savolpeugeot
   class Error < StandardError; end
+  class F1SalesCustom::Email::Source
+    def self.all
+      [
+        {
+          email_id: 'website',
+          name: 'Website'
+        }
+      ]
+    end
+  end
+
+  class F1SalesCustom::Email::Parser
+    def parse
+      parsed_email = @email.body.colons_to_hash(/(Campanha|Origem|Nome|E-mail|Telefone|Veículo|Loja|Mensagem|ATENÇÃO).*?:/, false)
+      source = F1SalesCustom::Email::Source.all[0]
+      description = "Campanha: #{parsed_email['campanha']}; Origem: #{parsed_email['origem']}; Loja: #{parsed_email['loja']}"
+
+      {
+        source: {
+          name: source[:name]
+        },
+        customer: {
+          name: parsed_email['nome'],
+          phone: parsed_email['telefone'].tr('^0-9', ''),
+          email: parsed_email['email']
+        },
+        product: { name: parsed_email['veculo'] },
+        message: parsed_email['mensagem'],
+        description: description
+      }
+    end
+  end
 
   class F1SalesCustom::Hooks::Lead
     class << self

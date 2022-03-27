@@ -6,6 +6,13 @@ GIT
     f1sales_helpers (0.1.0)
 
 GIT
+  remote: https://github.com/marciok/f1sales_custom-email.git
+  revision: 6cad18ba9095284c15da97d7afd50aa47cc711a8
+  branch: master
+  specs:
+    f1sales_custom-email (0.1.0)
+
+GIT
   remote: https://github.com/marciok/f1sales_custom-hooks.git
   revision: 6e00712d0fdaf083ea4dab8b621c247dd7dd1142
   branch: master
@@ -15,7 +22,7 @@ GIT
 PATH
   remote: .
   specs:
-    savolpeugeot (0.1.0)
+    savolpeugeot (0.1.1)
 
 GEM
   remote: https://rubygems.org/
@@ -38,10 +45,12 @@ GEM
     rspec-support (3.10.3)
 
 PLATFORMS
+  ruby
   x86_64-darwin-20
 
 DEPENDENCIES
   byebug
+  f1sales_custom-email!
   f1sales_custom-hooks!
   f1sales_helpers!
   rake (~> 13.0)
